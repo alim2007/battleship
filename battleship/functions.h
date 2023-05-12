@@ -17,6 +17,7 @@ void showSubMenu(int currOption)
 {
     cout << (currOption == 0 ? "> " : "  ") << "Place ships manually" << '\n';
     cout << (currOption == 1 ? "> " : "  ") << "Place ships randomly" << '\n';
+    cout << (currOption == 2 ? "> " : "  ") << "Back to main menu" << '\n';
 }
 
 void printBoard()
@@ -190,7 +191,7 @@ void getPlayerShips()
         }
         else if (key == ENTER)
         {
-            updateBoard(currX, currY, copyX, copyY, currShipSizeIndex, true, isHorizontal);
+            if (isValid(currX, currY, currShipSizeIndex, isHorizontal)) updateBoard(currX, currY, copyX, copyY, currShipSizeIndex, true, isHorizontal);
             currShipSizeIndex++;
             currX = BOARD_SIZE / 2;
             currY = BOARD_SIZE / 2;

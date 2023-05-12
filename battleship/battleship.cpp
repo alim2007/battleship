@@ -1,12 +1,14 @@
 #include <iostream>
 #include <conio.h>
 #include <Windows.h> 
+// #include <ctime>
+// #include <cstdlib>
 using namespace std;
 #include "functions.h"
 
 int main()
 {
-	srand(time(NULL));
+	// srand(time(NULL));
 	for (int i = 0; i < BOARD_SIZE; i++) arr[i] = new char[BOARD_SIZE];
 
 	for (int i = 0; i < BOARD_SIZE; i++)
@@ -19,70 +21,79 @@ int main()
 		}
 	}
 
-    //int currOption = 0;
-    //bool menuLoop = true;
+    int currOption = 0;
+    int currSubOption = 0;
+    bool menuLoop = true, subMenuLoop = true;
 
-    //while (menuLoop) {
-    //    system("cls"); 
-    //    showMainMenu(currOption);
+    while (menuLoop) {
+        system("cls"); 
+        showMainMenu(currOption);
 
-    //    int key = _getch(); 
-    //    if (key == 224 || key == ENTER) 
-    //    {
-    //        key = _getch(); 
-    //        cout << "key pressed: " << key << endl;
-    //        //cout << "currSubOption: " << currSubOption << endl;
-    //        switch (key) 
-    //        {
-    //        case UP:
-    //            currOption--;
-    //            if (currOption < 0) currOption = 2;
-    //            break;
-    //        case DOWN:
-    //            currOption++;
-    //            if (currOption > 2) currOption = 0;
-    //            break;
-    //        case ENTER:
-    //            switch (currOption) 
-    //            {
-    //            case 0:
-    //                int currSubOption;
-    //                cout << "key pressed: " << key << endl;
-    //                while (true)
-    //                {
-    //                    char key = _getch();
-    //                    if (key == ENTER) 
-    //                    { 
-    //                        if (currSubOption == 0) 
-    //                        {
+        int key = _getch(); 
+        if (key == 224 || key == ENTER) 
+        {
+            key = _getch(); 
+            cout << "key pressed: " << key << endl;
+            //cout << "currSubOption: " << currSubOption << endl;
+            switch (key) 
+            {
+            case UP:
+                currOption--;
+                if (currOption < 0) currOption = 2;
+                break;
+            case DOWN:
+                currOption++;
+                if (currOption > 2) currOption = 0;
+                break;
+            case ENTER:
+                switch (currOption) 
+                {
+                case 0:
+                    cout << "key pressed: " << key << endl;
+                    while (true)
+                    {
+                        system("cls");
+                        showSubMenu(currSubOption);
+                        char key = _getch();
+                        if (key == ENTER) 
+                        { 
+                            if (currSubOption == 0) 
+                            {
                                 getPlayerShips();
-    //                        }
-    //                        else if (currSubOption == 1) 
-    //                        {
-    //                            getPlayerShipsRand();
-    //                            printBoard();
-    //                        }
-    //                    }
-    //                    else if (key == UP && currSubOption > 0)
-    //                    {
-    //                        currSubOption--;
-    //                    }
-    //                    else if (key == DOWN && currSubOption < 1)
-    //                    {
-    //                        currSubOption++;
-    //                    }
+                                //subMenuLoop = false;
+                            }
+                            else if (currSubOption == 1) 
+                            {
+                                getPlayerShipsRand();
+                                printBoard();
+                                //subMenuLoop = false;
+                                _getch();
+                            }
+                            else if (currSubOption == 2)
+                            {
+                                break;
+                            }
+                        }
+                        else if (key == UP && currSubOption > 0)
+                        {
+                            currSubOption--;
+                        }
+                        else if (key == DOWN && currSubOption < 2)
+                        {
+                            currSubOption++;
+                        }
 
-    //                }
-    //                break;
-    //            case 1: // Help
-    //                break;
-    //            case 2: // Exit
-    //                return 0;
-    //            }
-    //            break;
-    //        }
-    //    }
-    //}
+                    }
+                    break;
+                case 1: // Help
+                    break;
+                case 2: // Exit
+                    return 0;
+                }
+                break;
+            }
+        }
+    }
 
 	
 	
