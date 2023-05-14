@@ -36,64 +36,7 @@ bool isValid(int x, int y, int currShipSizeIndex, bool isHorizontal)
 {
     int shipSize = shipSizes[currShipSizeIndex];
 
-    //// Check all cells around the ship's placement coordinates
-    //for (int i = y - 1; i <= y + 1; i++)
-    //{
-    //    for (int j = x - 1; j <= x + shipSize; j++)
-    //    {
-    //        // Skip the cell if it is out of bounds
-    //        if (i < 0 || i >= BOARD_SIZE || j < 0 || j >= BOARD_SIZE)
-    //            continue;
-
-    //        // Skip the current cell
-    //        if (i == y && j >= x && j < x + shipSize)
-    //            continue;
-
-    //        // Check if the cell contains a ship
-    //        if (arr[i][j] == 'S')
-    //            return false;
-    //    }
-    //}
-
-    if (isHorizontal)
-    {
-        if (x + shipSizes[currShipSizeIndex] >= BOARD_SIZE) return false;    
-        
-        else 
-        {
-            for (int i = 0; i < shipSizes[currShipSizeIndex]; i++) 
-            {
-                if (arr[y][x + i] == 'S' ||
-                    (y > 0 && arr[y - 1][x + i] == 'S') ||
-                    (y < BOARD_SIZE - 1 && arr[y + 1][x + i] == 'S')) 
-                {
-                    return false;
-                }
-            }
-        }
-    }
-
-    else
-    {
-        if (y + shipSizes[currShipSizeIndex] >= BOARD_SIZE) return false;
-
-        else
-        {
-            for (int i = 0; i < shipSizes[currShipSizeIndex]; i++)
-            {
-                if (arr[y + i][x] == 'S' ||
-                    (x > 0 && arr[y + i][x - 1] == 'S') ||
-                    (x < BOARD_SIZE - 1 && arr[y + i][x + 1] == 'S'))
-                {
-                    return false;
-                }
-            }
-        }
-    }
-
-    return true;
 }
-
 
 void updateBoard(int x, int y, int copyX, int copyY, int currShipSizeIndex, bool final, bool isHorizontal)
 {
@@ -165,7 +108,6 @@ void getPlayerShips()
                 //cout << "in up key";
                 //_getch();
                 copyX = currX, copyY = currY;
-                if (!isValid(currX, currY - 1, currShipSizeIndex, isHorizontal)) break;
                 currY--;
                 break;
 
@@ -173,7 +115,6 @@ void getPlayerShips()
                 //cout << "in down key";
                 //_getch();
                 copyX = currX, copyY = currY;
-                if (!isValid(currX, currY + 1, currShipSizeIndex, isHorizontal)) break;
                 currY++;
                 break;
 
@@ -181,7 +122,6 @@ void getPlayerShips()
                 //cout << "in left key";
                 //_getch();
                 copyX = currX, copyY = currY;
-                if (!isValid(currX, currX - 1, currShipSizeIndex, isHorizontal)) break;
                 currX--;
                 break;
 
@@ -189,7 +129,6 @@ void getPlayerShips()
                 //cout << "in right key";
                 //_getch();
                 copyX = currX, copyY = currY;
-                if (!isValid(currX, currX + 1, currShipSizeIndex, isHorizontal)) break;
                 currX++;
                 break;
 
