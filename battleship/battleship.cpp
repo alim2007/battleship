@@ -1,6 +1,8 @@
 #include <iostream>
 #include <conio.h>
 #include <Windows.h> 
+#include <iomanip>
+#include <string>
 // #include <ctime>
 // #include <cstdlib>
 using namespace std;
@@ -8,7 +10,7 @@ using namespace std;
 
 int main()
 {
-	// srand(time(NULL));
+	srand(time(NULL));
 	for (int i = 0; i < BOARD_SIZE; i++) arr[i] = new char[BOARD_SIZE];
 
 	for (int i = 0; i < BOARD_SIZE; i++)
@@ -26,79 +28,70 @@ int main()
     bool menuLoop = true, subMenuLoop = true;
 
     while (menuLoop) {
-        system("cls"); 
+        system("cls");
         showMainMenu(currOption);
 
-        int key = _getch(); 
-        if (key == 224 || key == ENTER) 
+        int key = _getch();
+        cout << "key pressed: " << key << endl;
+        switch (key)
         {
-            key = _getch(); 
-            cout << "key pressed: " << key << endl;
-            //cout << "currSubOption: " << currSubOption << endl;
-            switch (key) 
+        case UP:
+            currOption--;
+            if (currOption < 0) currOption = 2;
+            break;
+        case DOWN:
+            currOption++;
+            if (currOption > 2) currOption = 0;
+            break;
+        case ENTER:
+            switch (currOption)
             {
-            case UP:
-                currOption--;
-                if (currOption < 0) currOption = 2;
-                break;
-            case DOWN:
-                currOption++;
-                if (currOption > 2) currOption = 0;
-                break;
-            case ENTER:
-                switch (currOption) 
+            case 0:
+                while (true)
                 {
-                case 0:
-                    cout << "key pressed: " << key << endl;
-                    while (true)
+                    system("cls");
+                    showSubMenu(currSubOption);
+                    char key = _getch();
+                    if (key == ENTER)
                     {
-                        system("cls");
-                        showSubMenu(currSubOption);
-                        char key = _getch();
-                        if (key == ENTER) 
-                        { 
-                            if (currSubOption == 0) 
-                            {
-                                getPlayerShips();
-                                //subMenuLoop = false;
-                            }
-                            else if (currSubOption == 1) 
-                            {
-                                getPlayerShipsRand();
-                                printBoard();
-                                //subMenuLoop = false;
-                                _getch();
-                            }
-                            else if (currSubOption == 2)
-                            {
-                                break;
-                            }
-                        }
-                        else if (key == UP && currSubOption > 0)
+                        if (currSubOption == 0)
                         {
-                            currSubOption--;
+                            getPlayerShips();
                         }
-                        else if (key == DOWN && currSubOption < 2)
+                        else if (currSubOption == 1)
                         {
-                            currSubOption++;
+                            getPlayerShipsRand();
+                            printBoard();
+                            _getch();
                         }
-
+                        else if (currSubOption == 2)
+                        {
+                            break;
+                        }
                     }
-                    break;
-                case 1: // Help
-                    break;
-                case 2: // Exit
-                    return 0;
+                    else if (key == UP && currSubOption > 0)
+                    {
+                        currSubOption--;
+                    }
+                    else if (key == DOWN && currSubOption < 2)
+                    {
+                        currSubOption++;
+                    }
+
                 }
                 break;
+            case 1: // Help
+                break;
+            case 2:
+                return 0;
+            default:
+                break; 
             }
+            break;
+        default:
+            break; 
         }
     }
-
-	
-	
-	
-	
 	
 	
 	for (int i = 0; i < BOARD_SIZE; i++)
@@ -106,4 +99,5 @@ int main()
 		delete[] arr[i];
 	}
 	delete[] arr;
+    delete[] shipSizes;
 }
